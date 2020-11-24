@@ -1,0 +1,172 @@
+// 自路由切换
+.children-router-enter,
+.children-router-leave-to {
+  transform: translate3d(100%, 0, 0);
+  opacity: 0;
+}
+
+.children-router-enter-active {
+  transition-duration: 300ms;
+  transition-timing-function: ease-out;
+}
+
+.children-router-leave-active {
+  transition-duration: 200ms;
+  transition-timing-function: ease-in;
+}
+
+// 左滑(前进),
+.slide-left-enter {
+  transform: translate3d(100%, 0, 0);
+}
+
+.slide-left-leave-to {
+  transform: translate3d(-100%, 0, 0);
+}
+
+.slide-left-enter-active,
+.slide-left-leave-active {
+  transition: 300ms;
+}
+
+// 右滑(后退)
+.slide-right-enter {
+  transform: translate3d(-100%, 0, 0);
+}
+
+.slide-right-leave-to {
+  transform: translate3d(100%, 0, 0);
+}
+
+.slide-right-enter-active,
+.slide-right-leave-active {
+  transition: 300ms;
+}
+
+// 向上滑
+.slide-up-enter {
+  transform: translate3d(0, 100%, 0);
+}
+
+.slide-up-leave-to {
+  transform: translate3d(0, -100%, 0);
+}
+
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: 300ms;
+}
+
+// 向下滑
+.slide-down-enter {
+  transform: translate3d(0, -100%, 0);
+}
+
+.slide-down-leave-to {
+  transform: translate3d(0, 100%, 0);
+}
+
+.slide-down-enter-active,
+.slide-down-leave-active {
+  transition: 300ms;
+}
+
+// 向下滑返回
+.slide-down-up-enter,
+.slide-down-up-leave-to {
+  transform: translate3d(0, -100%, 0);
+  opacity: 0;
+}
+
+.slide-down-up-enter-active,
+.slide-down-up-leave-active {
+  transition: 300ms;
+}
+
+// 淡入淡出
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition-property: all;
+  transition-duration: 500ms;
+}
+
+.fade-enter-active {
+  transition-timing-function: ease-out;
+}
+
+.fade-leave-active {
+  transition-timing-function: ease-in;
+}
+
+// 淡入
+.draw-enter-active {
+  transition: all 3s ease;
+  opacity: 1;
+}
+
+.draw-enter {
+  opacity: 0;
+}
+
+// 缩放
+.zoom-enter,
+.zoom-leave-to {
+  transform: scale(0.8);
+  opacity: 0;
+}
+
+.zoom-enter-active,
+.zoom-leave-active {
+  transition-property: all;
+}
+
+.zoom-enter-active {
+  transition-timing-function: cubic-bezier(0, 0.33, 0.45, 1.55);
+  transition-duration: 300ms;
+}
+
+.zoom-leave-active {
+  transition-timing-function: cubic-bezier(0.29, -0.3, 1, 0.26);
+  transition-duration: 200ms;
+}
+
+.diceroll-enter-active {
+  animation: headShake 1s;
+  transition: all 1s;
+}
+@keyframes headShake {
+  0% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+
+  6.5% {
+    -webkit-transform: translateX(-6px) rotateY(-9deg);
+    transform: translateX(-6px) rotateY(-9deg);
+  }
+
+  18.5% {
+    -webkit-transform: translateX(5px) rotateY(7deg);
+    transform: translateX(5px) rotateY(7deg);
+  }
+
+  31.5% {
+    -webkit-transform: translateX(-3px) rotateY(-5deg);
+    transform: translateX(-3px) rotateY(-5deg);
+  }
+
+  43.5% {
+    -webkit-transform: translateX(2px) rotateY(3deg);
+    transform: translateX(2px) rotateY(3deg);
+  }
+
+  50% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+}

@@ -1,0 +1,52 @@
+@import "varibles";
+
+.flexCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flexStartCenter {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.flexEndCenter {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.flexSpaceCenter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flexColumnCenter {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* 超出隐藏 */
+.ellipsis1 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ellipsis2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.ellipsis3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
