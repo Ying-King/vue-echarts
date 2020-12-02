@@ -10,7 +10,7 @@ module.exports = {
   // 所有 webpack-dev-server 的选项
   devServer: {
     // host: '127.0.0.1',
-    // port: 8080, // 端口号
+    port: 8080, // 端口号
     open: true, // 启动服务后是否打开浏览器
     // 出现编译器错误或警告时，在浏览器中显示全屏覆盖。
     overlay: {
@@ -20,20 +20,20 @@ module.exports = {
 
     // 如果你的前端应用和后端 API 服务器没有运行在同一个主机上，
     // 你需要在开发环境下将 API 请求代理到 API 服务器。
-    proxy: {
-      "/api": {
-        target: "http:www.baidu.com", // 要代理的API地址
-        changeOrigin: true, // 允许跨域
-        pathRewrite: {
-          // 这里理解成用'/api'代替target里面的地址，后面组件中我们掉接口时直接用api代替
-          // 比如我要调用'http://www.abc.com/user/add'，直接写'/api/user/add'即可'
-          "^/api": "",
-        },
-      },
-      "/foo": {
-        target: "<other_url>",
-      },
-    },
+    // proxy: {
+    //   "/api": {
+    //     target: "http:www.baidu.com", // 要代理的API地址
+    //     changeOrigin: true, // 允许跨域
+    //     pathRewrite: {
+    //       // 这里理解成用'/api'代替target里面的地址，后面组件中我们掉接口时直接用api代替
+    //       // 比如我要调用'http://www.abc.com/user/add'，直接写'/api/user/add'即可'
+    //       "^/api": "",
+    //     },
+    //   },
+    //   "/foo": {
+    //     target: "<other_url>",
+    //   },
+    // },
   },
   css: {
     // 开启 CSS source maps?
@@ -58,8 +58,8 @@ module.exports = {
             exclude: /(\/|\\)(node_modules)(\/|\\)/, // 忽略某些文件夹下的文件或特定文件
             include: undefined, // 如果设置了include，那将只有匹配到的文件才会被转换，例如只转换 'src/mobile' 下的文件 (include: /\/src\/mobile\//)
             landscape: false, // 是否添加根据 landscapeWidth 生成的媒体查询条件 @media (orientation: landscape)
-            landscapeUnit: "vw", // 横屏时使用的单位
-            landscapeWidth: 568, // 横屏时使用的视口宽度
+            // landscapeUnit: "vw", // 横屏时使用的单位
+            // landscapeWidth: 568, // 横屏时使用的视口宽度
           }),
         ],
       },
@@ -85,6 +85,6 @@ module.exports = {
       .set("utils", resolve("src/utils"))
       .set("static", resolve("src/static"))
       .set("store", resolve("src/store"))
-      .set("views", resolve("src/views"));
+      .set("pages", resolve("src/pages"));
   },
 };

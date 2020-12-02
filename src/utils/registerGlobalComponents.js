@@ -3,8 +3,8 @@
 */
 import Vue from 'vue'
 
-// 自动加载 common 目录下的 .js 结尾的文件
-const componentsContext = require.context('@/components/common', true, /\.js$/)
+// 自动加载 common 目录下的 .vue 结尾的文件
+const componentsContext = require.context('@/components/common', true, /\.vue$/)
 
 componentsContext.keys().forEach(component => {
   const componentConfig = componentsContext(component)

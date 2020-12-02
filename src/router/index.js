@@ -6,7 +6,7 @@ Vue.use(VueRouter);
 
 const router = new VueRouter({
   mode: "history",
-  base: process.env.BASE_URL,
+  // base: process.env.BASE_URL,
   routes,
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
@@ -18,6 +18,9 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
+  if (to.meta.title) { //判断是否有标题
+    document.title = to.meta.title
+  }
   next();
 });
 

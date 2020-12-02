@@ -1,5 +1,5 @@
 function load(component) {
-  return (resolve) => require([`views/${component}`], resolve);
+  return (resolve) => require([`pages/${component}`], resolve);
 }
 
 const routes = [
