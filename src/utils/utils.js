@@ -92,18 +92,6 @@ export function formatDateFilter(value, type) {
   }
 }
 
-export function datedifference(sDate1, sDate2) {
-  //sDate1和sDate2是2006-12-18格式
-  var dateSpan, tempDate, iDays;
-  sDate1 = Date.parse(sDate1);
-  sDate2 = Date.parse(sDate2);
-  dateSpan = sDate2 - sDate1;
-  dateSpan = Math.abs(dateSpan);
-  iDays = Math.floor(dateSpan / (24 * 3600 * 1000));
-  console.log(iDays, "iDays");
-  return iDays;
-}
-
 // 元素失去焦点隐藏iphone的软键盘
 export function objBlur(id, time) {
   var obj = document.getElementById(id),
@@ -128,4 +116,79 @@ export function objBlur(id, time) {
   } else {
     throw new Error("objBlur()没有找到元素");
   }
+}
+
+/**
+ * 深层克隆对象
+ *
+ * @param obj
+ * @returns {*}
+ * @example
+ *
+ * const a = { foo: 'bar', obj: { a: 1, b: 2 } };
+ * const b = deepClone(a);
+ * // => a !== b, a.obj !== b.obj
+ */
+export function deepClone(obj) {
+  var clone = Object.assign({}, obj);
+  Object.keys(clone).forEach(
+    function (key) { return (clone[key] = typeof obj[key] === 'object' ? deepClone(obj[key]) : obj[key]); }
+  );
+  return Array.isArray(obj) && obj.length
+    ? (clone.length = obj.length) && Array.from(clone)
+    : Array.isArray(obj)
+      ? Array.from(obj)
+      : clone;
+}
+
+/**
+ * 获取移动设备信息，如是否是iOS，android等
+ *
+ * @returns {{}}
+ * @example
+ *
+ * getDevice();
+ * // => {"androidChrome":false,"ipad":false,"iphone":true,"android":false,"ios":true,"os":"ios","osVersion":"9.1","webView":null}
+ */
+export function getDevice() {
+  var device = {};
+  var ua = navigator.userAgent;
+  var android = ua.match(/(Android);?[\s\/]+([\d.]+)?/);
+  var ipad = ua.match(/(iPad).*OS\s([\d_]+)/);
+  var ipod = ua.match(/(iPod)(.*OS\s([\d_]+))?/);
+  var iphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/);
+  device.ios = device.android = device.iphone = device.ipad = device.androidChrome = false;
+  // Android
+  if (android) {
+    device.os = 'android';
+    device.osVersion = android[2];
+    device.android = true;
+    device.androidChrome = ua.toLowerCase().indexOf('chrome') >= 0;
+  }
+  if (ipad || iphone || ipod) {
+    device.os = 'ios';
+    device.ios = true;
+  }
+  // iOS
+  if (iphone && !ipod) {
+    device.osVersion = iphone[2].replace(/_/g, '.');
+    device.iphone = true;
+  }
+  if (ipad) {
+    device.osVersion = ipad[2].replace(/_/g, '.');
+    device.ipad = true;
+  }
+  if (ipod) {
+    device.osVersion = ipod[3] ? ipod[3].replace(/_/g, '.') : null;
+    device.iphone = true;
+  }
+  // iOS 8+ changed UA
+  if (device.ios && device.osVersion && ua.indexOf('Version/') >= 0) {
+    if (device.osVersion.split('.')[0] === '10') {
+      device.osVersion = ua.toLowerCase().split('version/')[1].split(' ')[0];
+    }
+  }
+  // Webview
+  device.webView = (iphone || ipad || ipod) && ua.match(/.*AppleWebKit(?!.*Safari)/i);
+  return device;
 }
