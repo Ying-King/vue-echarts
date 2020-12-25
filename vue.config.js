@@ -1,5 +1,6 @@
 const path = require("path");
 const resolve = (dir) => path.join(__dirname, dir);
+const timestamp = new Date().getTime(); //当前时间为了防止打包缓存不刷新，所以给每个js文件都加一个时间戳
 
 module.exports = {
   publicPath: "./", // 所有的资源都会被链接为相对路径
@@ -7,6 +8,16 @@ module.exports = {
   assetsDir: "static", // 放置生成的静态资源的目录
   lintOnSave: false, // 是否开启eslint保存检测
   productionSourceMap: false, // 如果你不需要生产环境的 source map，可以将其设置为 false 以加速生产环境构建。
+
+  //打包文件添加时间戳，防止缓存不更新
+  configureWebpack: {
+    output: {
+      // 输出重构  打包编译后的 文件名称  【模块名称.时间戳】
+      filename: `[name].${timestamp}.js`,
+      chunkFilename: `[name].${timestamp}.js`,
+    },
+  },
+
   // 所有 webpack-dev-server 的选项
   devServer: {
     // host: '127.0.0.1',
